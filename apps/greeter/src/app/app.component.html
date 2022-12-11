@@ -1,1 +1,21 @@
-<cypress-testid-proxy-nx-welcome></cypress-testid-proxy-nx-welcome>
+<form>
+  <p>
+    <label>
+      Your name:
+      <input #nameInput type="text" data-testid="greeting-form-name-input" />
+    </label>
+  </p>
+  <p>
+    <button
+      type="button"
+      data-testid="greeting-form-submit-button"
+      (click)="greetName = nameInput.value"
+    >
+      Go
+    </button>
+  </p>
+</form>
+
+<p *ngIf="greetName" data-testid="personal-greeting-output">
+  Hello, {{ greetName }}!
+</p>

@@ -12,13 +12,16 @@
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
-    login(email: string, password: string): void;
+    getByTestId<K extends keyof HTMLElementTagNameMap>(
+      testId: string,
+      options?: Partial<Loggable & Timeoutable & Withinable & Shadow>
+    ): Chainable<JQuery<HTMLElementTagNameMap[K]>>;
   }
 }
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+Cypress.Commands.add('getByTestId', (testId, options) => {
+  return cy.get(`[data-testid=${testId}]`, options);
 });
 //
 // -- This is a child command --
